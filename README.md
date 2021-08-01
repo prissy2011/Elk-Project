@@ -5,52 +5,9 @@ The files in this repository were used to configure the network depicted below.
 
 ![](Azure%20Network%20Diagram.png)
 
-These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the Elk file may be used to install only certain pieces of it, such as Filebeat.
+These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the ansible file may be used to install only certain pieces of it, such as Filebeat.
 
-  '''
-  ---
-     - name: Configure Elk VM with Docker
-       hosts: elk
-       become: true
-       tasks:
-       - name: Install docker.io
-         apt:
-          update_cache: yes
-          force_apt_get: yes
-          name: docker.io
-          state: present
-
-      - name: Install python3-pip
-        apt:
-         force_apt_get: yes
-         name: python3-pip
-         state: present
-
-      - name: Install Docker module
-        pip:
-         name: docker
-         state: present
-
-      - name: Increase virtual memory
-        command: sysctl -w vm.max_map_count=262144
-
-      - name: Use more memory
-        sysctl:
-         name: vm.max_map_count
-         value: 262144
-         state: present
-         reload: yes
-
-      - name: download and launch a docker elk container
-        docker_container:
-          name: elk
-          image: sebp/elk:761
-          state: started
-          restart_policy: always
-          published_ports:
-           -  5601:5601
-           -  9200:9200
-           -  5044:5044
+  https://github.com/prissy2011/Elk-Project/blob/main/Playbooks/filebeat-config.yml
 
 This document contains the following details:
 - Description of the Topologu
@@ -65,7 +22,7 @@ This document contains the following details:
 
 The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.
 
-Load balancing ensures that the application will be highly reliable, in addition to restricting traffic to the network.
+Load balancing ensures that the application will be highly available, in addition to restricting access to the network.
 - Load balancers can protect systems against DDos attacks. The advantage of a jump box is having the ability to SSH into a virtual machine and containers with hardened security.
 
 Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the logs and system traffic.
